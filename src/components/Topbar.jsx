@@ -1,4 +1,19 @@
-function Topbar() {
+
+function Topbar({ user }) {
+  const displayName =
+    user?.full_name ||
+    user?.name ||
+    user?.user_metadata?.full_name ||
+    user?.email?.split("@")[0] ||
+    "User";
+
+  const displayRole =
+    user?.role ||
+    user?.user_metadata?.role ||
+    "User";
+
+  const avatar = displayName.charAt(0).toUpperCase();
+
   return (
     <header className="topbar">
       <div className="topbar-left">
@@ -33,11 +48,11 @@ function Topbar() {
         </button>
 
         <div className="user-profile">
-          <div className="user-avatar">A</div>
+          <div className="user-avatar">{avatar}</div>
 
           <div className="user-info">
-            <strong>Admin</strong>
-            <span>Administrator</span>
+            <strong>{displayName}</strong>
+            <span>{displayRole}</span>
           </div>
         </div>
       </div>
